@@ -69,7 +69,27 @@ const InteractionPanel = () => {
   const [interactionInputVal , setInteractionInputVal] = useState("");
   const [titleInputVal , setTitleInputVal] = useState("");
 
+  const getMessages = async () => {
+    const options = {
+      method : "POST",
+      body: JSON.stringify({
+        message: 'Hey buddy'
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    try{
+      const response = await fetch ('http://localhost:8000/completions',options)
+      const fdata = await response.json();
+      console.log("fdata", fdata)
+    } catch(err) {
+      console.log("err", err)
+    }
+  }
+
   const showEnteredText = (e) => {
+    getMessages();
     setInteractionInputVal("");
   }
 
